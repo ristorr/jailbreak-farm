@@ -1,6 +1,19 @@
--- LocalScript (place in StarterPlayerScripts)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Create RemoteEvent if it doesn't exist
+local killEvent = ReplicatedStorage:FindFirstChild("KillEvent") or Instance.new("RemoteEvent")
+killEvent.Name = "KillEvent"
+killEvent.Parent = ReplicatedStorage
+
+-- Listen for kill requests
+killEvent.OnServerEvent:Connect(function(player, humanoid)
+	if player.Name == "YourUsernameHere" and humanoid and humanoid:IsA("Humanoid") then
+		humanoid.Health = 0
+	end
+end)
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
 local player = Players.LocalPlayer
 local mouse = player:GetMouse()
 local killEvent = ReplicatedStorage:WaitForChild("KillEvent")
