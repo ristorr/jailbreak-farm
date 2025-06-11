@@ -1,0 +1,16 @@
+-- LocalScript (place in StarterPlayerScripts)
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+local mouse = player:GetMouse()
+local killEvent = ReplicatedStorage:WaitForChild("KillEvent")
+
+mouse.Button1Down:Connect(function()
+	local target = mouse.Target
+	if target and target.Parent then
+		local humanoid = target.Parent:FindFirstChildOfClass("Humanoid")
+		if humanoid then
+			killEvent:FireServer(humanoid)
+		end
+	end
+end)
